@@ -29,13 +29,20 @@ public class Config {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
 
-        // Allow both local dev and production Vercel frontend
-        config.setAllowedOrigins(Arrays.asList(
-            "http://localhost:3000",
-            "https://healthcare-xi-topaz.vercel.app",
-            "https://healthcare-xi-topaz.vercel.app/"
-        ));
+//         Allow both local dev and production Vercel frontend
+//        config.setAllowedOrigins(Arrays.asList(
+//            "http://localhost:3000",
+//            "https://healthcare-xi-topaz.vercel.app",
+//            "https://healthcare-xi-topaz.vercel.app/"
+//        ));
 
+        config.setAllowedOrigins(Arrays.asList(
+        	    "http://localhost:3000",
+        	    "https://medqrate-frontend.vercel.app",
+      	    "https://medqrate-frontend-e65a2963n-anushkas-projects-7fdbed2d.vercel.app"
+       	));
+        
+        
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
