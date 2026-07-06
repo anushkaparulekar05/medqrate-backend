@@ -19,9 +19,13 @@ public class Config {
         http
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .csrf(csrf -> csrf.disable())
+//            .authorizeHttpRequests(auth -> auth
+//                .anyRequest().permitAll()
             .authorizeHttpRequests(auth -> auth
-                .anyRequest().permitAll()
-            );
+            	    .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
+            	    .anyRequest().permitAll()
+            	);
+//            );
         return http.build();
     }
 
@@ -36,11 +40,17 @@ public class Config {
 //            "https://healthcare-xi-topaz.vercel.app/"
 //        ));
 
-        config.setAllowedOrigins(Arrays.asList(
+//        config.setAllowedOrigins(Arrays.asList(
+//        	    "http://localhost:3000",
+//        	    "https://medqrate-frontend.vercel.app",
+//      	    "https://medqrate-frontend-e65a2963n-anushkas-projects-7fdbed2d.vercel.app"
+//       	));
+        
+        config.setAllowedOriginPatterns(Arrays.asList(
         	    "http://localhost:3000",
         	    "https://medqrate-frontend.vercel.app",
-      	    "https://medqrate-frontend-e65a2963n-anushkas-projects-7fdbed2d.vercel.app"
-       	));
+        	    "https://*.vercel.app"
+        	));
         
         
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
