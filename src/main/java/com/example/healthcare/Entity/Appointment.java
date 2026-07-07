@@ -18,8 +18,10 @@ public class Appointment {
 
     private String status; // PENDING / APPROVED / REJECTED / CANCELLED
 
-    @Column(name = "image_path", columnDefinition = "LONGTEXT")
-    private String imagePath; // Doctor uploaded prescription QR image (base64)
+//    @Column(name = "image_path", columnDefinition = "LONGTEXT")
+//    private String imagePath; // Doctor uploaded prescription QR image (base64)
+    @Column(name = "image_path", columnDefinition = "TEXT")
+    private String imagePath;
 
     @Column(name = "prescription_notes", columnDefinition = "TEXT")
     private String prescriptionNotes; // Doctor's written notes
