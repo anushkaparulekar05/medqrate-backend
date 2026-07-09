@@ -19,13 +19,10 @@ public class Config {
         http
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .csrf(csrf -> csrf.disable())
-//            .authorizeHttpRequests(auth -> auth
-//                .anyRequest().permitAll()
             .authorizeHttpRequests(auth -> auth
-            	    .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
-            	    .anyRequest().permitAll()
-            	);
-//            );
+                .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
+                .anyRequest().permitAll()
+            );
         return http.build();
     }
 
@@ -33,28 +30,19 @@ public class Config {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
 
-//         Allow both local dev and production Vercel frontend
-//        config.setAllowedOrigins(Arrays.asList(
-//            "http://localhost:3000",
-//            "https://healthcare-xi-topaz.vercel.app",
-//            "https://healthcare-xi-topaz.vercel.app/"
-//        ));
-
-//        config.setAllowedOrigins(Arrays.asList(
-//        	    "http://localhost:3000",
-//        	    "https://medqrate-frontend.vercel.app",
-//      	    "https://medqrate-frontend-e65a2963n-anushkas-projects-7fdbed2d.vercel.app"
-//       	));
-        
+        // Allow ALL Vercel previews + production + localhost
         config.setAllowedOriginPatterns(Arrays.asList(
-        	    "http://localhost:3000",
-        	    "https://medqrate-frontend.vercel.app",
-        	    "https://*.vercel.app"
-        	));
-        
-        
+            "http://localhost:3000",
+            "http://localhost:3001",
+            "https://medqrate-frontend.vercel.app",
+            "https://healthcare-xi-topaz.vercel.app",
+            "https://*.vercel.app",
+            "https://*.up.railway.app"
+        ));
+
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
         config.setAllowedHeaders(List.of("*"));
+        config.setExposedHeaders(List.of("*"));
         config.setAllowCredentials(true);
         config.setMaxAge(3600L);
 
